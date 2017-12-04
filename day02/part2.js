@@ -46,16 +46,19 @@ const numberArrayToDividedPairs = R.reduce(
   { answer: undefined, anArray: [] }
 )
 const getNumberThatDividesThis = (theNumber, theArray) => {
-  const cramps = R.reduce((previousValue, currentValue) => {
-    if (typeof previousValue === 'number') return previousValue
-    if (theNumber > currentValue && theNumber % currentValue === 0) {
-      return theNumber / currentValue
-    }
-    if (theNumber < currentValue && currentValue % theNumber === 0) {
-      return currentValue / theNumber
-    }
-  }, undefined)
-  return cramps(theArray)
+  return R.reduce(
+    (previousValue, currentValue) => {
+      if (typeof previousValue === 'number') return previousValue
+      if (theNumber > currentValue && theNumber % currentValue === 0) {
+        return theNumber / currentValue
+      }
+      if (theNumber < currentValue && currentValue % theNumber === 0) {
+        return currentValue / theNumber
+      }
+    },
+    undefined,
+    theArray
+  )
 }
 const pairDifference = x => x.max - x.min
 
